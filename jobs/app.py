@@ -7,9 +7,9 @@ app = Flask(__name__)
 
 #Database related
 def open_connection():
-	connection = getattr(g, "_connection", "None")
+	connection = getattr(g, "_connection", None)
 
-	if connection == "None":
+	if connection is None:
 		connection = g._connection = sqlite3.connect(PATH)
 	connection.row_factory = sqlite3.Row
 
@@ -33,7 +33,7 @@ def execute_sql(sql, values = (), commit = False, single = False):
 def close_connection(exception):
 	connection = getattr(g, "_connection", None)
 
-	if connection != "None":
+	if connection is not None:
 		connection.close()
 
 #Job route
@@ -67,9 +67,8 @@ def review(employer_id):
 		execute_sql('INSERT INTO review (review, rating, title, date, status, employer_id) VALUES (?, ?, ?, ?, ?, ?)', (review, rating, title, date, status, employer_id), commit=True)
 
 		return redirect(url_for('employer', employer_id=employer_id))
+
 	return render_template('review.html', employer_id=employer_id)
-
-
 
 
 #Application

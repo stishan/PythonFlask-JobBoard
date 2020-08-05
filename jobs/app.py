@@ -86,7 +86,6 @@ def application(job_id):
 		execute_sql('INSERT INTO applications(application_type, text, employment_status, terms_of_notice, job_id, application_date) VALUES (?, ?, ?, ?, ?, ?)', (application_type, info, status, notice, job_id, date), commit=True)
 
 		return redirect(url_for('job', job_id=job_id))
-		#return redirect(url_for('job.html', job=job))
 
 	return render_template('application.html', job=job)
 

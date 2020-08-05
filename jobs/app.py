@@ -71,9 +71,23 @@ def review(employer_id):
 	return render_template('review.html', employer_id=employer_id)
 
 #Application route
-@app.route('/application/<job_id>', methods=('GET', 'POST'))
+@app.route('/job/<job_id>/application', methods=('GET', 'POST'))
 def application(job_id):
 	job = execute_sql('SELECT job.id, job.title, job.description, job.salary, employer.id as employer_id, employer.name as employer_name FROM job JOIN employer ON employer.id = job.employer_id WHERE job.id = ?', [job_id], single=True)
+
+	if request.method == 'POST':
+		application_type = request.form['application_type']
+		info = request.form['info']
+		status = request.form['status']
+		notice = request.form['notice']
+
+		date = datetime.datetime.now().strftime("%m/%d/%Y")
+
+		execute_sql('INSERT INTO applications(application_type, text, employment_status, terms_of_notice, job_id, application_date) VALUES (?, ?, ?, ?, ?, ?)', (application_type, info, status, notice, job_id, date), commit=True)
+
+		return redirect(url_for('job', job_id=job_id))
+		#return redirect(url_for('job.html', job=job))
+
 	return render_template('application.html', job=job)
 
 

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>New Application</h1>
+<form method="post">
+	<div class="field">
+		<label class="label">{{ job['title'] }}</label>
+	</div>
+	<div class="field">
+		<label class="label">Application Type</label>
+		<div class="control">
+			<div class="select">
+				<select name="rating" id="rating">
+					<option value="internal">Internal</option>
+					<option value="external">External</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">Tell us about yourself</label>
+		<div class="control">
+			<textarea class="textarea" name="info" id="info" required></textarea>
+		</div>
+	</div>
+	<div class="field">
+		<label class="label">Current employment status</label>
+		<div class="control">
+			<div class="select">
+				<select name="status" id="status">
+					<option value="Unemployed">Unemployed</option>
+					<option value="Full time">Full time</option>
+					<option value="Less than full time">Less than full time</option>
+				</select>
+			</div>
+		</div>
+	<div class="field">
+		<label class="label">Terms of notice</label>
+		<div class="control">
+			<div class="select">
+				<select name="notice" id="notice">
+					<option value="None">None</option>
+					<option value="1">1 month</option>
+					<option value="2">2 months</option>
+					<option value="3+">3+ months</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="field is-grouped">
+		<div class="control">
+			<button class="button is-link">Submit</button>
+		</div>
+		<div class="control">
+			<a href="{{ url_for('job', job_id=job['id']) }}" class="button is-text">Cancel</a>
+		</div>
+	</div>
+</form>
+{% endblock %}

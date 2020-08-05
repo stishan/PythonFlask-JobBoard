@@ -2,4 +2,12 @@
 
 {% block content %}
 {{ show_job(job) }}
+
+<br>
+<div class="columns">
+	<div class="column">
+		<a href="{{ url_for('application', job_id=job['id']) }}" class="button is-info is-pulled-right">Create
+			Application</a>
+	</div>
+</div>
 {% endblock %}

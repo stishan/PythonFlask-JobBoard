@@ -70,6 +70,12 @@ def review(employer_id):
 
 	return render_template('review.html', employer_id=employer_id)
 
+#Application route
+@app.route('/application/<job_id>', methods=('GET', 'POST'))
+def application(job_id):
+	job = execute_sql('SELECT job.id, job.title, job.description, job.salary, employer.id as employer_id, employer.name as employer_name FROM job JOIN employer ON employer.id = job.employer_id WHERE job.id = ?', [job_id], single=True)
+	return render_template('application.html', job=job)
+
 
 #Application
 @app.route('/')

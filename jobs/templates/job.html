@@ -6,8 +6,12 @@
 <br>
 <div class="columns">
 	<div class="column">
-		<a href="{{ url_for('application', job_id=job['id']) }}" class="button is-info is-pulled-right">Create
+		<a href="{{ url_for('application', job_id=job['id']) }}" class="button is-info is-pulled-left">Create
 			Application</a>
+	</div>
+	<div class="column">
+		<a href="{{ url_for('application', job_id=job['id']) }}" class="button is-info is-pulled-right">View
+			Applications</a>
 	</div>
 </div>
 {% endblock %}
